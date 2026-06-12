@@ -79,28 +79,51 @@ Update S3 bucket policy to allow only CloudFront:
 
 
 {
+
   "Version": "2012-10-17",
+
   "Statement": [
+  
     {
+    
       "Effect": "Allow",
+      
       "Principal": {
+      
         "Service": "cloudfront.amazonaws.com"
+      
       },
+      
       "Action": "s3:GetObject",
+      
       "Resource": "arn:aws:s3:::your-bucket-name/*",
+      
       "Condition": {
+      
         "StringEquals": {
+        
           "AWS:SourceArn": "arn:aws:cloudfront::[ACCOUNT_ID]:distribution/[DISTRIBUTION_ID]"
+       
         }
+      
       }
+    
     },
+    
     {
+    
       "Effect": "Allow",
+      
       "Principal": "*",
+      
       "Action": "s3:GetObject",
+      
       "Resource": "arn:aws:s3:::your-bucket-name/*"
+    
     }
+  
   ]
+
 }
 
 
